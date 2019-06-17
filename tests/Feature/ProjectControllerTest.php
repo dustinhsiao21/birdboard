@@ -6,7 +6,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\Project;
-use App\Models\User;
+use App\User;
 
 class ProjectControllerTest extends TestCase
 {
@@ -27,6 +27,8 @@ class ProjectControllerTest extends TestCase
         $this->withoutExceptionHandling();
 
         $this->actingAs(factory(User::class)->create());
+
+        $this->get(route('project.create'))->assertStatus(200);
 
         $inputs = [
             'title' => $this->faker->sentence,
