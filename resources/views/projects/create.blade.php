@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
-    <title></title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('content')
     <form action="{{ route('project.store') }}" method="POST" class="container">
         @csrf
         <h1 class="heading is-l">create a project</h1>
@@ -32,9 +25,9 @@
             <label class="label" for="description">Description</label>
 
             <div class="control">
-                <button type="submit" class="button is-link">Create a Project</button>
+                <button type="submit" class="btn btn-primary">Create a Project</button>
+                <a href="{{ route('project.index')}}"class="btn btn-danger">Cancel</a>
             </div>
         </div>
     </form>
-</body>
-</html>
+@endsection
