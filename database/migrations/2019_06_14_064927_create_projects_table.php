@@ -15,12 +15,12 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id')->unsigned()->comment('title');
+            $table->bigInteger('user_id')->unsigned()->comment('title');
             $table->string('title')->comment('title');
             $table->text('description')->comment('description');
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // make a foregin key
+            
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // make a foreign key
         });
     }
 

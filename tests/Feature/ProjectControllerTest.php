@@ -18,7 +18,7 @@ class ProjectControllerTest extends TestCase
         $project2 = factory(Project::class)->make();
 
         $this->get(route('project.index'))->assertRedirect(route('login'));
-        $this->get(route('project.show', ['id' => $project->id]))->assertRedirect(route('login'));
+        $this->get(route('project.show', ['project' => $project->id]))->assertRedirect(route('login'));
         $this->get(route('project.store', $project2->toArray()))->assertRedirect(route('login'));
     }
 
@@ -26,7 +26,7 @@ class ProjectControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $this->actingAs(factory(User::class)->create());
+        $this->signIn();
 
         $this->get(route('project.create'))->assertStatus(200);
 
@@ -44,7 +44,7 @@ class ProjectControllerTest extends TestCase
 
     public function testAProjectRequiredTitleDescription()
     {
-        $this->actingAs(factory(User::class)->create());
+        $this->signIn();
 
         $inputs = [
             'title' =>  factory(Project::class)->raw(['title' => '']),
@@ -62,20 +62,20 @@ class ProjectControllerTest extends TestCase
 
         $user = factory(User::class)->create();
 
-        $this->actingAs($user);
+        $this->signIn($user);
 
         $project = factory(Project::class)->create(['user_id' => $user->id]);
-        $this->get(route('project.show', ['id' => $project->id]))
+        $this->get(route('project.show', ['project' => $project->id]))
             ->assertSee($project->description)
             ->assertSee($project->title);
     }
 
     public function testCannotViewProjectOfOthers()
     {
-        $this->actingAs(factory(User::class)->create());
+        $this->signIn();
 
         $project = factory(Project::class)->create();
-        
+
         $this->get($project->path())->assertStatus(403);
     }
 
@@ -83,7 +83,7 @@ class ProjectControllerTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $this->actingAs($user);
+        $this->signIn($user);
 
         $userProject = factory(Project::class)->create(['user_id' => $user->id]);
         $othersProject = factory(Project::class)->create();

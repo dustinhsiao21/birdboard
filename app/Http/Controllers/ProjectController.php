@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Project\StoreRequest;
 use App\Repositories\ProjectRepository;
+use App\Models\Project;
 
 class ProjectController extends Controller
 {
@@ -26,10 +27,8 @@ class ProjectController extends Controller
         return view('projects.create');
     }
 
-    public function show($id)
+    public function show(Project $project)
     {
-        $project = $this->projects->find($id);
-
         if (auth()->user()->isNot($project->user)) {
             abort(403);
         }
@@ -39,7 +38,7 @@ class ProjectController extends Controller
 
     public function store(StoreRequest $request)
     {
-        $this->projects->store($request->onlyRules() + ['user_id' => auth()->user()->id]);
+        $this->projects->create($request->onlyRules() + ['user_id' => auth()->user()->id]);
 
         return redirect(route('project.index'));
     }

@@ -23,8 +23,13 @@ abstract class BaseRepository
         return $this->model->all();
     }
 
-    public function store(array $array)
+    public function create(array $array)
     {
         return $this->model->create($array);
+    }
+
+    public function update(int $id, array $array)
+    {
+        return $this->find($id)->update($array);
     }
 }
