@@ -12,6 +12,7 @@ abstract class Request extends FormRequest
         $fields = array_map(function ($field) {
             return strstr($field, '.*', true) ?: $field;
         }, $fields);
+
         return $this->only($fields);
     }
 
@@ -20,4 +21,3 @@ abstract class Request extends FormRequest
         return [];
     }
 }
-

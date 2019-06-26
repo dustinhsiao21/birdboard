@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Models\Project;
+use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
     protected $fillable = [
         'project_id',
         'body',
-        'completed'
+        'completed',
     ];
 
     protected $touches = ['project'];
