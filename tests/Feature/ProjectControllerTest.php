@@ -92,4 +92,30 @@ class ProjectControllerTest extends TestCase
             ->assertSee($userProject->title)
             ->assertDontSee($othersProject->title);
     }
+
+    public function testCanUpdateProject()
+    {
+        $this->signIn();
+
+        $project = factory(Project::class)->create(['user_id' => auth()->id()]);
+
+        $note = 'This is a note';
+        $description = 'This is a description';
+        $title = 'This is a title';
+
+        $inputs = [
+            'project' => $project->id,
+            'title' => $title,
+            'description' => $description,
+            'notes' => $note,
+        ];
+
+        $this->post(route('project.update', $inputs))
+            ->assertRedirect($project->path());
+
+        $this->get($project->path())
+            ->assertSee($note)
+            ->assertSee($description)
+            ->assertSee($title);
+    }
 }

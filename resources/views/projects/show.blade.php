@@ -31,9 +31,13 @@
                 </form>
             </div>
             <p class="text-secondary">General Notes</p>
-            <div class="card mb-3 p-3">
-                <p>{{ $project->description }}</p>
-            </div>
+            <form method="POST" action="{{ route('project.update', ['project' => $project->id])}}">
+                @csrf
+                <div class="card mb-3 p-3">
+                    <textarea name="notes">{{ $project->notes }}</textarea>
+                </div>
+                <button class="btn btn-primary">Save</button>
+            </form>
         </div>
         <div class="col-4">
             @include('projects.card')

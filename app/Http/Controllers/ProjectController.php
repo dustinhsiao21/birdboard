@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Project\StoreRequest;
+use App\Http\Requests\Project\UpdateRequest;
 use App\Repositories\ProjectRepository;
 use App\Models\Project;
 
@@ -41,5 +42,12 @@ class ProjectController extends Controller
         $this->projects->create($request->onlyRules() + ['user_id' => auth()->user()->id]);
 
         return redirect(route('project.index'));
+    }
+
+    public function update(Project $project, UpdateRequest $request)
+    {
+        $project->update($request->onlyRules());
+
+        return redirect($project->path());
     }
 }
