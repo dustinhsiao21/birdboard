@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use App\Models\Task;
 use App\User;
+use App\Models\Task;
+use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
     protected $fillable = [
         'user_id',
         'title',
-        'description'
+        'description',
     ];
 
     public function path()

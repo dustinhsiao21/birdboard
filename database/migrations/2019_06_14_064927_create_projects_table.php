@@ -19,7 +19,7 @@ class CreateProjectsTable extends Migration
             $table->string('title')->comment('title');
             $table->text('description')->comment('description');
             $table->timestamps();
-            
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // make a foreign key
         });
     }

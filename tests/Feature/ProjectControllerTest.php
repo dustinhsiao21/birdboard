@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\User;
 use Tests\TestCase;
+use App\Models\Project;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Models\Project;
-use App\User;
 
 class ProjectControllerTest extends TestCase
 {
@@ -36,7 +36,7 @@ class ProjectControllerTest extends TestCase
         ];
 
         $this->post(route('project.store', $inputs))->assertRedirect(route('project.index'));
-        
+
         $this->assertDatabaseHas('projects', $inputs);
 
         $this->get(route('project.index'))->assertSee($inputs['title']);
@@ -87,7 +87,7 @@ class ProjectControllerTest extends TestCase
 
         $userProject = factory(Project::class)->create(['user_id' => $user->id]);
         $othersProject = factory(Project::class)->create();
-        
+
         $this->get(route('project.index'))
             ->assertSee($userProject->title)
             ->assertDontSee($othersProject->title);

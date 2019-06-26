@@ -3,9 +3,9 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Models\Project;
 use App\Models\Task;
+use App\Models\Project;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProjectTest extends TestCase
 {
@@ -16,7 +16,7 @@ class ProjectTest extends TestCase
         $project = factory(Project::class)->create();
 
         $expect = route('project.show', ['id' => $project->id]);
-        
+
         $this->assertEquals($expect, $project->path());
     }
 }

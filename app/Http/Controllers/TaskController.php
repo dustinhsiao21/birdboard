@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\TaskRepository;
-use App\Models\Project;
 use App\Models\Task;
+use App\Models\Project;
+use App\Repositories\TaskRepository;
 use App\Http\Requests\Task\CreateRequest;
 use App\Http\Requests\Task\UpdateRequest;
 
@@ -33,7 +33,7 @@ class TaskController extends Controller
         if (auth()->user()->isNot($project->user)) {
             abort(403);
         }
-        
+
         $inputs = $request->onlyRules();
         $inputs['completed'] = array_has($inputs, 'completed') ? true : false;
         $inputs['project_id'] = $project->id;

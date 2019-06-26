@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
 
-abstract class BaseRepository 
+abstract class BaseRepository
 {
     private $model;
 

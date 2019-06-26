@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Project\StoreRequest;
-use App\Repositories\ProjectRepository;
 use App\Models\Project;
+use App\Repositories\ProjectRepository;
+use App\Http\Requests\Project\StoreRequest;
 
 class ProjectController extends Controller
 {
