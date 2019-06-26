@@ -1,7 +1,8 @@
-php:
-  disabled:
-    - unused_use
-  finder:
-    not-name:
-      - index.php
-      - server.php
+preset: laravel
+risky: false
+disabled:
+  - unused_use
+finder:
+  not-name:
+    - index.php
+    - server.php
