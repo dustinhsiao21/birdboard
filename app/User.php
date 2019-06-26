@@ -2,10 +2,10 @@
 
 namespace App;
 
+use App\Models\Project;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Models\Project;
 
 class User extends Authenticatable
 {

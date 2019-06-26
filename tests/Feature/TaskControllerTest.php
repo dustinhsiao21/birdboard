@@ -2,12 +2,12 @@
 
 namespace Tests\Feature;
 
+use App\User;
 use Tests\TestCase;
+use App\Models\Task;
+use App\Models\Project;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Models\Project;
-use App\Models\Task;
-use App\User;
 
 class TaskControllerTest extends TestCase
 {
@@ -20,7 +20,7 @@ class TaskControllerTest extends TestCase
         $user = factory(User::class)->create();
 
         $this->signIn($user);
-        
+
         $body = 'changed';
 
         $project = factory(Project::class)->create(['user_id' => $user->id]);
@@ -41,7 +41,6 @@ class TaskControllerTest extends TestCase
 
         $this->post(route('project.task.create', ['project_id' => $project->id, 'body' => $body]))
             ->assertStatus(403);
-        
     }
 
     public function testATaskShouldBeupdate()
@@ -57,7 +56,7 @@ class TaskControllerTest extends TestCase
             'project_id' => $task->id,
             'task' => $task->id,
             'body' => $body,
-            'completed' => true
+            'completed' => true,
         ];
 
         $this->post(route('project.task.update', $inputs))
@@ -65,7 +64,7 @@ class TaskControllerTest extends TestCase
 
         $this->assertDatabaseHas('tasks', [
             'body' => $body,
-            'completed' => 1
+            'completed' => 1,
         ]);
     }
 
@@ -79,6 +78,5 @@ class TaskControllerTest extends TestCase
 
         $this->post(route('project.task.update', ['project' => $task->project->id, 'task' => $task->id, 'body' => $body]))
             ->assertStatus(403);
-        
     }
 }

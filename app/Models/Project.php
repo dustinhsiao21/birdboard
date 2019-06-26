@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use App\Models\Task;
 use App\User;
+use App\Models\Task;
+use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
@@ -12,7 +12,7 @@ class Project extends Model
         'user_id',
         'title',
         'description',
-        'notes'
+        'notes',
     ];
 
     public function path()
