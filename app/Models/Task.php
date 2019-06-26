@@ -13,6 +13,8 @@ class Task extends Model
         'completed'
     ];
 
+    protected $touches = ['project'];
+
     public function path()
     {
         return route('project.task.update', ['project' => $this->project_id, 'task' => $this->id]);
