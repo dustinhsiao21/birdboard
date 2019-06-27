@@ -18,6 +18,8 @@ class ProjectControllerTest extends TestCase
         $project2 = factory(Project::class)->make();
 
         $this->get(route('project.index'))->assertRedirect(route('login'));
+        $this->get(route('project.create'))->assertRedirect(route('login'));
+        $this->get(route('project.edit', ['project' => $project->id]))->assertRedirect(route('login'));
         $this->get(route('project.show', ['project' => $project->id]))->assertRedirect(route('login'));
         $this->get(route('project.store', $project2->toArray()))->assertRedirect(route('login'));
     }
@@ -35,7 +37,7 @@ class ProjectControllerTest extends TestCase
             'description' => $this->faker->paragraph,
         ];
 
-        $this->post(route('project.store', $inputs))->assertRedirect(route('project.index'));
+        $this->post(route('project.store', $inputs))->assertRedirect(route('project.show', ['project' => 1]));
 
         $this->assertDatabaseHas('projects', $inputs);
 
@@ -60,11 +62,9 @@ class ProjectControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->create();
+        $this->signIn();
 
-        $this->signIn($user);
-
-        $project = factory(Project::class)->create(['user_id' => $user->id]);
+        $project = factory(Project::class)->create(['user_id' => auth()->id()]);
         $this->get(route('project.show', ['project' => $project->id]))
             ->assertSee($project->description)
             ->assertSee($project->title);
@@ -81,11 +81,9 @@ class ProjectControllerTest extends TestCase
 
     public function testCanOnlyViewUserProject()
     {
-        $user = factory(User::class)->create();
+        $this->signIn();
 
-        $this->signIn($user);
-
-        $userProject = factory(Project::class)->create(['user_id' => $user->id]);
+        $userProject = factory(Project::class)->create(['user_id' => auth()->id()]);
         $othersProject = factory(Project::class)->create();
 
         $this->get(route('project.index'))

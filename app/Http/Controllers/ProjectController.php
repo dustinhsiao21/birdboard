@@ -28,6 +28,11 @@ class ProjectController extends Controller
         return view('projects.create');
     }
 
+    public function edit(Project $project)
+    {
+        return view('projects.edit', compact('project'));
+    }
+
     public function show(Project $project)
     {
         if (auth()->user()->isNot($project->user)) {
@@ -39,9 +44,9 @@ class ProjectController extends Controller
 
     public function store(StoreRequest $request)
     {
-        $this->projects->create($request->onlyRules() + ['user_id' => auth()->user()->id]);
+        $project = $this->projects->create($request->onlyRules() + ['user_id' => auth()->user()->id]);
 
-        return redirect(route('project.index'));
+        return redirect($project->path());
     }
 
     public function update(Project $project, UpdateRequest $request)

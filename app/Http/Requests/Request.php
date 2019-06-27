@@ -6,6 +6,11 @@ use Illuminate\Foundation\Http\FormRequest;
 
 abstract class Request extends FormRequest
 {
+    public function authorize()
+    {
+        return true;
+    }
+
     public function onlyRules()
     {
         $fields = array_keys($this->rules());
@@ -19,5 +24,10 @@ abstract class Request extends FormRequest
     public function rules()
     {
         return [];
+    }
+
+    public function forbiddenResponse()
+    {
+        abort(403);
     }
 }

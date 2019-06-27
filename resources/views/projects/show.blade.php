@@ -1,12 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="d-flex justify-item-between">
+    <div class="d-flex justify-content-between">
         <p class="text-secondary">
             <a href="{{route('project.index')}}" class="text-decoration-none text-secondary">MyProjects </a>/ {{ $project->title}}
         </p>
+        <a href="{{ route('project.edit', ['project' => $project->id])}}" class="btn btn-primary">Update Project</a>
     </div>
-    <div class="row">
+    <div class="row mt-4">
         <div class="col-8">
             <p class="text-secondary">Tasks</p>
                 @foreach($project->tasks as $task)
@@ -15,7 +16,7 @@
                         @csrf        
                         <div class="form-inline justify-content-between">
                             <div class="form-group col-11">
-                                <input type="text" name="body" class="form-control-plaintext w-100" value="{{ $task->body }}">
+                            <input type="text" name="body" class="form-control-plaintext w-100 {{ $task->completed ? 'text-secondary' : 'text-dark' }} " value="{{ $task->body }}">
                             </div>
                             <div class="form-check">
                                 <input type="checkbox" name="completed" class="form-check-input" {{ $task->completed ? 'checked' : ''}} onChange="this.form.submit()">
