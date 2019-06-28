@@ -2,8 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Repositories\BaseRepository;
 use App\Models\Activity;
+use App\Repositories\BaseRepository;
 
 class ActivityRepository extends BaseRepository
 {

@@ -2,10 +2,9 @@
 
 namespace App\Observers;
 
-use App\Models\Project;
 use App\Models\Task;
+use App\Models\Project;
 use App\Repositories\ActivityRepository;
-
 
 class TaskObserver
 {
@@ -15,6 +14,7 @@ class TaskObserver
     {
         $this->activities = $activities;
     }
+
     /**
      * Handle the task "created" event.
      *
@@ -75,7 +75,7 @@ class TaskObserver
     {
         $this->activities->create([
             'project_id' => $project->id,
-            'description' => $type
+            'description' => $type,
         ]);
     }
 }
