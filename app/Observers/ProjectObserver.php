@@ -73,7 +73,7 @@ class ProjectObserver
     {
         $this->activities->create([
             'project_id' => $project->id,
-            'description' => $type
+            'description' => $type,
         ]);
     }
 }

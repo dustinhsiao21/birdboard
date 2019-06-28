@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Repositories\ProjectRepository;
+use App\Http\Requests\Project\ShowRequest;
 use App\Http\Requests\Project\StoreRequest;
 use App\Http\Requests\Project\UpdateRequest;
-use App\Http\Requests\Project\ShowRequest;
 
 class ProjectController extends Controller
 {
