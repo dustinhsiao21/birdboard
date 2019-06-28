@@ -26,8 +26,6 @@ class ProjectControllerTest extends TestCase
 
     public function testUserCanCreateAProject()
     {
-        $this->withoutExceptionHandling();
-
         $this->signIn();
 
         $this->get(route('project.create'))->assertStatus(200);
@@ -60,8 +58,6 @@ class ProjectControllerTest extends TestCase
 
     public function testCanViewProject()
     {
-        $this->withoutExceptionHandling();
-
         $this->signIn();
 
         $project = factory(Project::class)->create(['user_id' => auth()->id()]);
