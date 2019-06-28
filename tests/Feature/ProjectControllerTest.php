@@ -116,4 +116,25 @@ class ProjectControllerTest extends TestCase
             ->assertSee($description)
             ->assertSee($title);
     }
+
+    public function testCannotUpdateOthersProject()
+    {
+        $this->signIn();
+
+        $project = factory(Project::class)->create();
+
+        $note = 'This is a note';
+        $description = 'This is a description';
+        $title = 'This is a title';
+
+        $inputs = [
+            'project' => $project->id,
+            'title' => $title,
+            'description' => $description,
+            'notes' => $note,
+        ];
+
+        $this->post(route('project.update', $inputs))
+            ->assertStatus(403);
+    }
 }

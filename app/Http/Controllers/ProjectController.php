@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Repositories\ProjectRepository;
 use App\Http\Requests\Project\StoreRequest;
 use App\Http\Requests\Project\UpdateRequest;
+use App\Http\Requests\Project\ShowRequest;
 
 class ProjectController extends Controller
 {
@@ -33,12 +34,8 @@ class ProjectController extends Controller
         return view('projects.edit', compact('project'));
     }
 
-    public function show(Project $project)
+    public function show(Project $project, ShowRequest $request)
     {
-        if (auth()->user()->isNot($project->user)) {
-            abort(403);
-        }
-
         return view('projects.show', compact('project'));
     }
 
