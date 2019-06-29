@@ -8,7 +8,9 @@
     <div class="row">
         @foreach ($projects as $project)
         <div class="col-md-4 col-xs-12 pb-5">
-            @include('projects.card')
+            <div class="bg-white shadow-sm rounded px-3 py-3 h-100">
+                @include('projects.card')
+            </div>
         </div>
         @endforeach
     </div>

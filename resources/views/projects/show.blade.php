@@ -41,7 +41,10 @@
             </form>
         </div>
         <div class="col-4">
-            @include('projects.card')
+            <div class="bg-white shadow-sm rounded px-3 py-3">
+                @include('projects.card')
+            </div>
+            @include('projects.activity.card')
         </div>
     </div>
 @endsection
