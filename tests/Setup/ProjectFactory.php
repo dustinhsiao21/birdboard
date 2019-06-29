@@ -2,30 +2,30 @@
 
 namespace Tests\Setup;
 
-use App\Models\Project;
-use App\Models\Task;
 use App\User;
+use App\Models\Task;
+use App\Models\Project;
 
-class ProjectFactory 
+class ProjectFactory
 {
     /**
-     * number of the task
+     * number of the task.
      *
      * @var int
      */
     protected $taskCounts = 0;
 
     /**
-     * user of the project
+     * user of the project.
      *
      * @var User
      */
     protected $user;
 
     /**
-     * set Count
+     * set Count.
      *
-     * @param integer $count
+     * @param int $count
      * @return $this
      */
     public function withTask(int $count)
@@ -36,7 +36,7 @@ class ProjectFactory
     }
 
     /**
-     * set user
+     * set user.
      *
      * @param User $user
      * @return $this
@@ -49,18 +49,18 @@ class ProjectFactory
     }
 
     /**
-     * Arrange the Project
+     * Arrange the Project.
      *
      * @return Project
      */
     public function create()
     {
         $project = factory(Project::class)->create([
-            'user_id' => $this->user ??  factory(User::class)
+            'user_id' => $this->user ?? factory(User::class),
         ]);
 
         factory(Task::class, $this->taskCounts)->create([
-            'project_id' => $project
+            'project_id' => $project,
         ]);
 
         return $project;
