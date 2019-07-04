@@ -1,1 +1,1 @@
-Completed a Task
+{{ $activity->user->name }} Completed "{{ $activity->task ? $activity->task->body: '' }}"

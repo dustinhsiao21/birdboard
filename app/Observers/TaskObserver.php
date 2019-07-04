@@ -23,7 +23,7 @@ class TaskObserver
      */
     public function created(Task $task)
     {
-        $this->recordActivity($task->project, 'created_task');
+        $this->recordActivity($task, 'created_task');
     }
 
     /**
@@ -34,8 +34,13 @@ class TaskObserver
      */
     public function updated(Task $task)
     {
-        $type = $task->completed ? 'completed_task' : 'incompleted_task';
-        $this->recordActivity($task->project, $type);
+        if ($task->getOriginal('body') != $task->body){
+            $this->recordActivity($task, 'updated_task');
+        }
+        if ($task->getOriginal('completed') != $task->completed){
+            $type = $task->completed ? 'completed_task' : 'incompleted_task';
+            $this->recordActivity($task, $type);
+        }
     }
 
     /**
@@ -46,7 +51,7 @@ class TaskObserver
      */
     public function deleted(Task $task)
     {
-        $this->recordActivity($task->project, 'deleted_task');
+        $this->recordActivity($task, 'deleted_task');
     }
 
     /**
@@ -71,10 +76,13 @@ class TaskObserver
         //
     }
 
-    protected function recordActivity(Project $project, $type)
+    protected function recordActivity(Task $task, $type)
     {
         $this->activities->create([
-            'project_id' => $project->id,
+            'project_id' => $task->project->id,
+            'user_id' => auth()->id() ?? $task->project->user->id,
+            'task_type' => Task::class,
+            'task_id' => $task->id,
             'description' => $type,
         ]);
     }

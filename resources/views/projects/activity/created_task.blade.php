@@ -1,1 +1,1 @@
-Created a Task
+{{ $activity->user->name }} Created "{{ $activity->task ? $activity->task->body: '' }}"

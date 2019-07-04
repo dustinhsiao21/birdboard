@@ -1,1 +1,1 @@
-Incompleted a Task
+{{ $activity->user->name }} Incompleted "{{ $activity->task ? $activity->task->body: '' }}"

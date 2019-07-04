@@ -8,7 +8,7 @@
         <a href="{{ route('project.edit', ['project' => $project->id])}}" class="btn btn-primary">Update Project</a>
     </div>
     <div class="row mt-4">
-        <div class="col-8">
+        <div class="col-lg-8 col-sm-12">
             <p class="text-secondary">Tasks</p>
                 @foreach($project->tasks as $task)
                 <div class="card mb-3 p-3">
@@ -16,7 +16,7 @@
                         @csrf        
                         <div class="form-inline justify-content-between">
                             <div class="form-group col-11">
-                            <input type="text" name="body" class="form-control-plaintext w-100 {{ $task->completed ? 'text-secondary' : 'text-dark' }} " value="{{ $task->body }}">
+                                <input type="text" name="body" class="form-control-plaintext w-100 {{ $task->completed ? 'text-secondary' : 'text-dark' }} " value="{{ $task->body }}">
                             </div>
                             <div class="form-check">
                                 <input type="checkbox" name="completed" class="form-check-input" {{ $task->completed ? 'checked' : ''}} onChange="this.form.submit()">
@@ -24,23 +24,31 @@
                         </div>
                     </form>
                 </div>
-            @endforeach
-            <div class="card p-3 mb-3">
-                <form action="{{route('project.task.create', ['project' => $project->id])}}" method="post">
+                @endforeach
+                <div class="card p-3 mb-3">
+                    <form action="{{route('project.task.create', ['project' => $project->id])}}" method="post">
+                        @csrf
+                        <div class="form-inline justify-content-between">
+                            <div class="form-group col-11">
+                                <input type="text" name="body" placeholder="Add a new Task" class="form-control-plaintext w-100">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            <p class="text-secondary">General Notes</p>
+            <div class="mb-3">
+                <form method="POST" action="{{ route('project.update', ['project' => $project->id])}}">
                     @csrf
-                    <input type="text" name="body" placeholder="Add a new Task" class="form-control-plaintext w-100">
+                    <div class="card mb-3 p-3">
+                        <div class="form-group col-12">
+                            <textarea name="notes" class="w-100 form-control">{{ $project->notes }}</textarea>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary">Save</button>
                 </form>
             </div>
-            <p class="text-secondary">General Notes</p>
-            <form method="POST" action="{{ route('project.update', ['project' => $project->id])}}">
-                @csrf
-                <div class="card mb-3 p-3">
-                    <textarea name="notes">{{ $project->notes }}</textarea>
-                </div>
-                <button class="btn btn-primary">Save</button>
-            </form>
         </div>
-        <div class="col-4">
+        <div class="col-lg-4 col-sm-12">
             <div class="bg-white shadow-sm rounded px-3 py-3">
                 @include('projects.card')
             </div>

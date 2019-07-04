@@ -12,7 +12,8 @@ class TriggerActivityTest extends TestCase
 
     public function testCreateAProject()
     {
-        $project = ProjectFactory::create();
+        $user = $this->signIn();
+        $project = ProjectFactory::userBy($user)->create();
 
         $this->assertCount(1, $project->activities);
         $this->assertEquals('created', $project->activities->last()->description);
@@ -20,7 +21,8 @@ class TriggerActivityTest extends TestCase
 
     public function testUpdateAProject()
     {
-        $project = ProjectFactory::create();
+        $user = $this->signIn();
+        $project = ProjectFactory::userBy($user)->create();
 
         $project->description = 'changed';
         $project->save();
@@ -31,15 +33,18 @@ class TriggerActivityTest extends TestCase
 
     public function testCreateATask()
     {
-        $project = ProjectFactory::withTask(1)->create();
+        $user = $this->signIn();
+        $project = ProjectFactory::userBy($user)->withTask(1)->create();
 
         $this->assertCount(2, $project->activities);
         $this->assertEquals('created_task', $project->activities->last()->description);
+        $this->assertEquals($project->tasks->first()->id, $project->activities->last()->task->id);
     }
 
     public function testCompletedATask()
     {
-        $project = ProjectFactory::withTask(1)->create();
+        $user = $this->signIn();
+        $project = ProjectFactory::userBy($user)->withTask(1)->create();
 
         $task = $project->tasks->first();
 
@@ -49,6 +54,7 @@ class TriggerActivityTest extends TestCase
 
         $this->assertCount(3, $project->activities);
         $this->assertEquals('completed_task', $project->activities->last()->description);
+        $this->assertEquals($task->id, $project->activities->last()->task->id);
 
         // incompleted
         $task->completed = false;
@@ -57,11 +63,13 @@ class TriggerActivityTest extends TestCase
 
         $this->assertCount(4, $project->activities);
         $this->assertEquals('incompleted_task', $project->activities->last()->description);
+        $this->assertEquals($task->id, $project->activities->last()->task->id);
     }
 
     public function testDeleteATask()
     {
-        $project = ProjectFactory::withTask(1)->create();
+        $user = $this->signIn();
+        $project = ProjectFactory::userBy($user)->withTask(1)->create();
 
         $task = $project->tasks->first();
 
@@ -73,5 +81,19 @@ class TriggerActivityTest extends TestCase
 
         $this->assertCount(3, $project->activities);
         $this->assertEquals('deleted_task', $project->activities->last()->description);
+    }
+
+    public function testUpdatedATask()
+    {
+        $user = $this->signIn();
+        $project = ProjectFactory::userBy($user)->withTask(1)->create();
+
+        $task = $project->tasks->first();
+
+        $task->body = 'changed';
+        $task->save();
+
+        $this->assertCount(3, $project->activities);
+        $this->assertEquals('updated_task', $project->activities->last()->description);
     }
 }

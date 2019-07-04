@@ -1,0 +1,1 @@
+{{ $activity->user->name }} updated "{{ $activity->task ? $activity->task->body: '' }}"

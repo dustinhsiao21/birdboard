@@ -1,1 +1,1 @@
-Updated Project
+{{ $activity->user->name }} Updated Project

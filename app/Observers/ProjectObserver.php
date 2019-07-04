@@ -73,6 +73,7 @@ class ProjectObserver
     {
         $this->activities->create([
             'project_id' => $project->id,
+            'user_id' => auth()->id() ?? $project->user->id,
             'description' => $type,
         ]);
     }
