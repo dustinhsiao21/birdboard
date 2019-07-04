@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use App\Models\Task;
 use App\Models\Project;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProjectTest extends TestCase
@@ -18,5 +19,14 @@ class ProjectTest extends TestCase
         $expect = route('project.show', ['id' => $project->id]);
 
         $this->assertEquals($expect, $project->path());
+    }
+
+    public function testCanInviteUser()
+    {
+        $project = factory(Project::class)->create();
+
+        $project->invite($john = factory(User::class)->create());
+
+        $this->assertTrue($project->members->contains($john));
     }
 }

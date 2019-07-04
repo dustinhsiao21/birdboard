@@ -42,4 +42,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Project::class)->latest('updated_at');
     }
+
+    public function relatedProjects()
+    {
+        return $this->belongsToMany(Project::class)->latest('updated_at');
+    }
 }

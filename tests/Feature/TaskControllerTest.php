@@ -41,6 +41,21 @@ class TaskControllerTest extends TestCase
             ->assertStatus(403);
     }
 
+    public function testCanAddTaskOfOthersAsMember()
+    {
+        $user = $this->signIn();
+
+        $project = factory(Project::class)->create();
+        $project->invite($user);
+
+        $body = 'changed';
+
+        $this->post(route('project.task.create', ['project' => $project->id, 'body' => $body]))
+            ->assertRedirect(route('project.show', ['project' => $project->id]));
+
+        $this->assertDatabaseHas('tasks', ['body' => $body]);
+    }
+
     public function testATaskShouldBeUpdate()
     {
         $task = factory(Task::class)->create();
@@ -76,5 +91,23 @@ class TaskControllerTest extends TestCase
 
         $this->post(route('project.task.update', ['project' => $task->project->id, 'task' => $task->id, 'body' => $body]))
             ->assertStatus(403);
+    }
+
+    public function testCanUpdateTaskOfOthersAsMember()
+    {
+        $task = factory(Task::class)->create();
+
+        $user = $this->signIn();
+
+        $task->project->invite($user);
+
+        $body = 'changed';
+
+        $this->post(route('project.task.update', ['project' => $task->project->id, 'task' => $task->id, 'body' => $body]))
+            ->assertRedirect(route('project.show', ['project' => $task->project_id]));
+
+        $this->assertDatabaseHas('tasks', [
+            'body' => $body,
+        ]);
     }
 }

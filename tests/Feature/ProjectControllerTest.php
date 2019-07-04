@@ -42,6 +42,29 @@ class ProjectControllerTest extends TestCase
         $this->get(route('project.index'))->assertSee($inputs['title']);
     }
 
+    public function testUserCanSeeTheirProjects()
+    {
+        $john = $this->signIn();
+
+        $project = factory(Project::class)->create();
+
+        $project->invite($john);
+
+        $this->get(route('project.index'))->assertSee($project->title);
+    }
+
+    public function testUserCannotSeeOthersProjects()
+    {
+        $john = $this->signIn();
+
+        $project = factory(Project::class)->create();
+        $peter = factory(User::class)->create();
+
+        $project->invite($peter);
+
+        $this->get(route('project.index'))->assertDontSee($project->title);
+    }
+
     public function testAProjectRequiredTitleDescription()
     {
         $this->signIn();
@@ -62,6 +85,18 @@ class ProjectControllerTest extends TestCase
 
         $project = factory(Project::class)->create(['user_id' => auth()->id()]);
         $this->get(route('project.show', ['project' => $project->id]))
+            ->assertSee($project->description)
+            ->assertSee($project->title);
+    }
+
+    public function testCanViewProjectAsAMember()
+    {
+        $user = $this->signIn();
+        $project = factory(Project::class)->create();
+
+        $project->invite($user);
+
+        $this->get($project->path())
             ->assertSee($project->description)
             ->assertSee($project->title);
     }
@@ -92,6 +127,33 @@ class ProjectControllerTest extends TestCase
         $this->signIn();
 
         $project = factory(Project::class)->create(['user_id' => auth()->id()]);
+
+        $note = 'This is a note';
+        $description = 'This is a description';
+        $title = 'This is a title';
+
+        $inputs = [
+            'project' => $project->id,
+            'title' => $title,
+            'description' => $description,
+            'notes' => $note,
+        ];
+
+        $this->post(route('project.update', $inputs))
+            ->assertRedirect($project->path());
+
+        $this->get($project->path())
+            ->assertSee($note)
+            ->assertSee($description)
+            ->assertSee($title);
+    }
+
+    public function testCanUpdateProjectAsAMember()
+    {
+        $user = $this->signIn();
+        $project = factory(Project::class)->create();
+
+        $project->invite($user);
 
         $note = 'This is a note';
         $description = 'This is a description';

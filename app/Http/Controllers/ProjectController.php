@@ -19,7 +19,8 @@ class ProjectController extends Controller
 
     public function index()
     {
-        $projects = auth()->user()->projects;
+        $user = auth()->user();
+        $projects = $user->projects->merge($user->relatedProjects)->sortBy('updated_at');
 
         return view('projects.index', compact('projects'));
     }

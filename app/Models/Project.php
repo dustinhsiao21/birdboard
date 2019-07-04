@@ -26,6 +26,11 @@ class Project extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function members()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
     public function tasks()
     {
         return $this->hasMany(Task::class);
@@ -34,5 +39,10 @@ class Project extends Model
     public function activities()
     {
         return $this->hasMany(Activity::class)->latest();
+    }
+
+    public function invite(User $user)
+    {
+        $this->members()->attach($user);
     }
 }
