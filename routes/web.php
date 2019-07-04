@@ -12,6 +12,7 @@
 */
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', 'ProjectController@index')->name('index');
     Route::get('projects', 'ProjectController@index')->name('project.index');
     Route::get('projects/create', 'ProjectController@create')->name('project.create');
     Route::get('projects/{project}', 'ProjectController@show')->name('project.show');
