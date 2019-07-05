@@ -53,6 +53,7 @@
                 @include('projects.card')
             </div>
             @include('projects.activity.card')
+            @include('projects.detail')
         </div>
     </div>
 @endsection
