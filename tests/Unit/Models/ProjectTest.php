@@ -2,10 +2,10 @@
 
 namespace Tests\Unit;
 
+use App\User;
 use Tests\TestCase;
 use App\Models\Task;
 use App\Models\Project;
-use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProjectTest extends TestCase
