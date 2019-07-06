@@ -1,6 +1,6 @@
 # birdboard
 
-###installation
+### installation
 
 this is for laravel demo
 
@@ -15,7 +15,7 @@ php artisan migrate
 
 And You Can Enjoy the Demo!
 
-###Usage
+### Usage
 
 1. You could create a project.
 2. You can create a task for a project.
