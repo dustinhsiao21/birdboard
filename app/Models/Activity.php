@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\User;
+use Illuminate\Database\Eloquent\Model;
 
 class Activity extends Model
 {
