@@ -47,6 +47,13 @@
                     <button class="btn btn-primary">Save</button>
                 </form>
             </div>
+            @if($errors->any())
+            <div class="mt-3">
+                @foreach ($errors->all() as $error)
+                    <p class="text-danger">{{ $error }}</p>
+                @endforeach
+            </div>
+            @endif
         </div>
         <div class="col-lg-4 col-sm-12">
             <div class="bg-white shadow-sm rounded px-3 py-3">

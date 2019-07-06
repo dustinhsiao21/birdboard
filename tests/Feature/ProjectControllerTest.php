@@ -55,7 +55,7 @@ class ProjectControllerTest extends TestCase
 
     public function testUserCannotSeeOthersProjects()
     {
-        $john = $this->signIn();
+        $this->signIn();
 
         $project = factory(Project::class)->create();
         $peter = factory(User::class)->create();
