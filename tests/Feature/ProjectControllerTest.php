@@ -204,7 +204,7 @@ class ProjectControllerTest extends TestCase
 
         $this->post(route('project.invite', ['project' => $project->id, 'id' => $user->id]))
             ->assertStatus(302);
-        
+
         $this->assertTrue($project->fresh()->members->contains($user));
 
         //user not exist

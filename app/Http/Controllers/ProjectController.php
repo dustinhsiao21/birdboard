@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Repositories\UserRepository;
 use App\Repositories\ProjectRepository;
 use App\Http\Requests\Project\ShowRequest;
 use App\Http\Requests\Project\StoreRequest;
-use App\Http\Requests\Project\UpdateRequest;
 use App\Http\Requests\Project\InviteRequest;
-use App\Repositories\UserRepository;
+use App\Http\Requests\Project\UpdateRequest;
 
 class ProjectController extends Controller
 {
@@ -41,6 +41,7 @@ class ProjectController extends Controller
     {
         $except = array_merge($project->members->pluck('id')->toArray(), [$project->user_id]);
         $users = $users->findAllExcept($except);
+
         return view('projects.show', compact('project', 'users'));
     }
 

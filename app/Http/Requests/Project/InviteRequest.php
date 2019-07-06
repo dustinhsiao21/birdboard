@@ -15,7 +15,7 @@ class InviteRequest extends Request
     public function rules()
     {
         return [
-            'id' => 'required|integer'
+            'id' => 'required|integer',
         ];
     }
 }

@@ -34,10 +34,10 @@ class TaskObserver
      */
     public function updated(Task $task)
     {
-        if ($task->getOriginal('body') != $task->body){
+        if ($task->getOriginal('body') != $task->body) {
             $this->recordActivity($task, 'updated_task');
         }
-        if ($task->getOriginal('completed') != $task->completed){
+        if ($task->getOriginal('completed') != $task->completed) {
             $type = $task->completed ? 'completed_task' : 'incompleted_task';
             $this->recordActivity($task, $type);
         }
