@@ -7,6 +7,8 @@ use App\Repositories\ProjectRepository;
 use App\Http\Requests\Project\ShowRequest;
 use App\Http\Requests\Project\StoreRequest;
 use App\Http\Requests\Project\UpdateRequest;
+use App\Http\Requests\Project\InviteRequest;
+use App\Repositories\UserRepository;
 
 class ProjectController extends Controller
 {
@@ -35,9 +37,11 @@ class ProjectController extends Controller
         return view('projects.edit', compact('project'));
     }
 
-    public function show(Project $project, ShowRequest $request)
+    public function show(Project $project, ShowRequest $request, UserRepository $users)
     {
-        return view('projects.show', compact('project'));
+        $except = array_merge($project->members->pluck('id')->toArray(), [$project->user_id]);
+        $users = $users->findAllExcept($except);
+        return view('projects.show', compact('project', 'users'));
     }
 
     public function store(StoreRequest $request)
@@ -50,6 +54,15 @@ class ProjectController extends Controller
     public function update(Project $project, UpdateRequest $request)
     {
         $project->update($request->onlyRules());
+
+        return redirect($project->path());
+    }
+
+    public function invite(Project $project, InviteRequest $request, UserRepository $users)
+    {
+        $user = $users->findOrFail($request->id);
+
+        $project->invite($user);
 
         return redirect($project->path());
     }

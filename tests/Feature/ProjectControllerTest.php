@@ -195,4 +195,30 @@ class ProjectControllerTest extends TestCase
         $this->post(route('project.update', $inputs))
             ->assertStatus(403);
     }
+
+    public function testProjectCanInvitedUser()
+    {
+        $this->signIn();
+        $project = factory(Project::class)->create(['user_id' => auth()->id()]);
+        $user = factory(User::class)->create();
+
+        $this->post(route('project.invite', ['project' => $project->id, 'id' => $user->id]))
+            ->assertStatus(302);
+        
+        $this->assertTrue($project->fresh()->members->contains($user));
+
+        //user not exist
+        $this->post(route('project.invite', ['project' => $project->id, 'id' => 9999]))
+            ->assertStatus(404);
+    }
+
+    public function testProjectMemberCannotInvitedUser()
+    {
+        $this->signIn();
+        $project = factory(Project::class)->create();
+        $user = factory(User::class)->create();
+
+        $this->post(route('project.invite', ['project' => $project->id, 'id' => $user->id]))
+            ->assertStatus(403);
+    }
 }

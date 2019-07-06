@@ -18,6 +18,11 @@ abstract class BaseRepository
         return $this->model->find($id);
     }
 
+    public function findOrFail($id)
+    {
+        return $this->model->findOrFail($id);
+    }
+
     public function all()
     {
         return $this->model->all();

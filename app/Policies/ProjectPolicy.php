@@ -30,6 +30,11 @@ class ProjectPolicy
         return $this->basic($user, $project);
     }
 
+    public function invite(User $user, Project $project)
+    {
+        return $this->isOwner($user, $project);
+    }
+
     public function createTask(User $user, Project $project)
     {
         return $this->basic($user, $project);
@@ -42,6 +47,11 @@ class ProjectPolicy
 
     protected function basic(User $user, Project $project)
     {
-        return $user->is($project->user) || $project->members->contains($user);
+        return $this->isOwner($user, $project) || $project->members->contains($user);
+    }
+
+    protected function isOwner(User $user, Project $project)
+    {
+        return $user->is($project->user);
     }
 }
