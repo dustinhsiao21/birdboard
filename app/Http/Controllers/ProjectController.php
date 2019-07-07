@@ -7,9 +7,9 @@ use App\Repositories\UserRepository;
 use App\Repositories\ProjectRepository;
 use App\Http\Requests\Project\ShowRequest;
 use App\Http\Requests\Project\StoreRequest;
+use App\Http\Requests\Project\DeleteRequest;
 use App\Http\Requests\Project\InviteRequest;
 use App\Http\Requests\Project\UpdateRequest;
-use App\Http\Requests\Project\DeleteRequest;
 
 class ProjectController extends Controller
 {

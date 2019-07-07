@@ -251,6 +251,5 @@ class ProjectControllerTest extends TestCase
 
         $this->post(route('project.delete', ['project' => $project->id]))
             ->assertStatus(403);
-
     }
 }
