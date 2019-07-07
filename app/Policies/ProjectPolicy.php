@@ -35,6 +35,11 @@ class ProjectPolicy
         return $this->isOwner($user, $project);
     }
 
+    public function delete(User $user, Project $project)
+    {
+        return $this->isOwner($user, $project);
+    }
+
     public function createTask(User $user, Project $project)
     {
         return $this->basic($user, $project);

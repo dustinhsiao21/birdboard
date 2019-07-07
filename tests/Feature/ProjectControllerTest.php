@@ -221,4 +221,36 @@ class ProjectControllerTest extends TestCase
         $this->post(route('project.invite', ['project' => $project->id, 'id' => $user->id]))
             ->assertStatus(403);
     }
+
+    public function testProjectMemberCannotSeeTheInvitation()
+    {
+        // Bob is a member, so he could not see the others name for invitation
+        $Bob = $this->signIn();
+        $John = factory(User::class)->create();
+        $project = factory(Project::class)->create();
+        $project->invite($Bob);
+
+        $this->get($project->path())->assertDontSee($John->name);
+
+        // The Project owner could see the others name for invitation
+        $this->actingAs($project->user)->get($project->path())->assertSee($John->name);
+    }
+
+    public function testOnlyTheOwnerCouldDeleteTheProject()
+    {
+        $this->signIn();
+
+        $project = factory(Project::class)->create(['user_id' => auth()->id()]);
+
+        // if the auth user is the project owner
+        $this->post(route('project.delete', ['project' => $project->id]))
+            ->assertRedirect(route('project.index'));
+
+        // if the auth user is not the project owner
+        $project = factory(Project::class)->create();
+
+        $this->post(route('project.delete', ['project' => $project->id]))
+            ->assertStatus(403);
+
+    }
 }

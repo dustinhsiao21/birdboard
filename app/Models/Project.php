@@ -6,9 +6,12 @@ use App\User;
 use App\Models\Task;
 use App\Models\Activity;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Project extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'user_id',
         'title',
