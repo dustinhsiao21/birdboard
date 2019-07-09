@@ -26,13 +26,13 @@ class ProjectControllerTest extends TestCase
     public function testUserCanCreateProject()
     {
         $this->signIn();
-        
+
         //tasks with bodys null
         $inputs = [
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
             'tasks' => [
-                ['body' => '']
+                ['body' => ''],
             ],
         ];
 
@@ -45,7 +45,7 @@ class ProjectControllerTest extends TestCase
         $this->assertCount(0, $project->tasks);
 
         //tasks with bodys
-        $inputs['tasks'] = [['body' => '123'],['body' => '456']];
+        $inputs['tasks'] = [['body' => '123'], ['body' => '456']];
 
         $response = $this->post(route('project.store', $inputs))->assertStatus(200);
 
@@ -267,6 +267,5 @@ class ProjectControllerTest extends TestCase
 
         $this->post(route('project.delete', ['project' => $project->id]))
             ->assertStatus(403);
-
     }
 }
