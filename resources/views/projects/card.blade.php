@@ -4,11 +4,8 @@
 <p class="text-secondary">{{ Str::limit($project->description, 100) }}</p>
 @can('delete', $project)
 <div class="row justify-content-end mr-3">
-    <form action="{{ route('project.delete', ['project' => $project->id]) }}" method="POST">
-        @csrf
-        <button class="btn btn-danger">Delete</button>
-    </form>
+    <button type="button" class="btn btn-danger" @click="$modal.show('project-delete-modal')">Delete</button>
 </div>
 @endcan
-
+<project-delete-modal :project-id="{{ $project->id }}"></project-delete-modal>
 

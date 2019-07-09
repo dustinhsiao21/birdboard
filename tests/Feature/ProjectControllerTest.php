@@ -257,8 +257,10 @@ class ProjectControllerTest extends TestCase
         $project = factory(Project::class)->create(['user_id' => auth()->id()]);
 
         // if the auth user is the project owner
-        $this->post(route('project.delete', ['project' => $project->id]))
-            ->assertRedirect(route('project.index'));
+        $response = $this->post(route('project.delete', ['project' => $project->id]))
+            ->assertStatus(200);
+
+        $this->assertEquals($response->getContent(), route('project.index'));
 
         // if the auth user is not the project owner
         $project = factory(Project::class)->create();
