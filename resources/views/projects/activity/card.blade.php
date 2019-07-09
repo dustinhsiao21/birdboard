@@ -1,4 +1,7 @@
 <div class="card mt-3">
+    <div class="card-header">
+        Updated Log
+    </div>
     <div class="card-body">
         @foreach ($project->activities as $activity)
             <div class="d-flex justify-content-between">

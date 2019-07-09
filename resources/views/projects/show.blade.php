@@ -58,7 +58,8 @@
         <div class="col-lg-4 col-sm-12">
             @include('projects.card', ['isSameRow' => false])
             @include('projects.activity.card')
-            @include('projects.detail')
+            @include('projects.member')
+            @include('projects.invite')
         </div>
     </div>
 @endsection
