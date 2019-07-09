@@ -56,9 +56,7 @@
             @endif
         </div>
         <div class="col-lg-4 col-sm-12">
-            <div class="bg-white shadow-sm rounded px-3 py-3">
-                @include('projects.card')
-            </div>
+            @include('projects.card', ['isSameRow' => false])
             @include('projects.activity.card')
             @include('projects.detail')
         </div>
