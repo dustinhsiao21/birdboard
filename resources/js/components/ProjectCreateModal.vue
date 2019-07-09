@@ -58,7 +58,7 @@
                     })
                     .catch(errors => {
                         this.errors = errors.response.data.errors;
-                    })
+                    });
             }
         }
     }
