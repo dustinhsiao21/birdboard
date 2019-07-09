@@ -10650,3 +10650,7 @@ a.text-dark:focus {
   border-width: 4px !important;
 }
 
+.line-through {
+  text-decoration: line-through;
+}
+

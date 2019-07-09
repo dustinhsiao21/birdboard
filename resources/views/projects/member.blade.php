@@ -11,7 +11,7 @@
                     <p class="text-primary my-1">{{ $member->name }}</p>
                 @endforeach
             @else
-                No Members
+                No Other Members
             @endif
         </div>
     </div>

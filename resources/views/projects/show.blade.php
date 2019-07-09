@@ -16,7 +16,7 @@
                         @csrf        
                         <div class="form-inline justify-content-between">
                             <div class="form-group col-11">
-                                <input type="text" name="body" class="form-control-plaintext w-100 {{ $task->completed ? 'text-secondary' : 'text-dark' }} " value="{{ $task->body }}">
+                                <input type="text" name="body" class="{{ $task->completed ? 'line-through text-success' : 'text-dark' }} form-control-plaintext w-100" value="{{ $task->body }}">
                             </div>
                             <div class="form-check">
                                 <input type="checkbox" name="completed" class="form-check-input" {{ $task->completed ? 'checked' : ''}} onChange="this.form.submit()">
@@ -57,9 +57,9 @@
         </div>
         <div class="col-lg-4 col-sm-12">
             @include('projects.card', ['isSameRow' => false])
-            @include('projects.activity.card')
             @include('projects.member')
             @include('projects.invite')
+            @include('projects.activity.card')
         </div>
     </div>
 @endsection
