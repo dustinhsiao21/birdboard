@@ -7,9 +7,9 @@ use App\Repositories\UserRepository;
 use App\Repositories\ProjectRepository;
 use App\Http\Requests\Project\ShowRequest;
 use App\Http\Requests\Project\StoreRequest;
+use App\Http\Requests\Project\DeleteRequest;
 use App\Http\Requests\Project\InviteRequest;
 use App\Http\Requests\Project\UpdateRequest;
-use App\Http\Requests\Project\DeleteRequest;
 
 class ProjectController extends Controller
 {
@@ -50,13 +50,13 @@ class ProjectController extends Controller
     {
         $inputs = $request->onlyRules();
         $tasks = array_pull($inputs, 'tasks');
-        $tasks = array_filter($tasks, function($task){
-            return !is_null($task['body']);
+        $tasks = array_filter($tasks, function ($task) {
+            return ! is_null($task['body']);
         });
 
         $project = $this->projects->create($inputs + ['user_id' => auth()->user()->id]);
 
-        if( $tasks ){
+        if ($tasks) {
             $project->tasks()->createMany($tasks);
         }
 
