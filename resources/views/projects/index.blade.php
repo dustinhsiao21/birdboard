@@ -3,7 +3,7 @@
 @section('content')
     <div class="pb-4 d-flex justify-content-between">
         <p class="text-secondary">My Projects</p>
-        <a href="{{ route('project.create')}}" class="btn btn-primary">Add Project</a>
+        <a href="#" @click.prevent="$modal.show('project-create-modal')" class="btn btn-primary">Add Project</a>
     </div>
     <div class="row">
         @foreach ($projects as $project)
@@ -14,4 +14,5 @@
         </div>
         @endforeach
     </div>
+    <project-create-modal></project-create-modal>
 @endsection

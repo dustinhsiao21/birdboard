@@ -18,28 +18,42 @@ class ProjectControllerTest extends TestCase
         $project2 = factory(Project::class)->make();
 
         $this->get(route('project.index'))->assertRedirect(route('login'));
-        $this->get(route('project.create'))->assertRedirect(route('login'));
         $this->get(route('project.edit', ['project' => $project->id]))->assertRedirect(route('login'));
         $this->get(route('project.show', ['project' => $project->id]))->assertRedirect(route('login'));
         $this->get(route('project.store', $project2->toArray()))->assertRedirect(route('login'));
     }
 
-    public function testUserCanCreateAProject()
+    public function testUserCanCreateProject()
     {
         $this->signIn();
-
-        $this->get(route('project.create'))->assertStatus(200);
-
+        
+        //tasks with bodys null
         $inputs = [
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
+            'tasks' => [
+                ['body' => '']
+            ],
         ];
 
-        $this->post(route('project.store', $inputs))->assertRedirect(route('project.show', ['project' => 1]));
+        $response = $this->post(route('project.store', $inputs))->assertStatus(200);
 
-        $this->assertDatabaseHas('projects', $inputs);
+        $project = Project::first();
 
-        $this->get(route('project.index'))->assertSee($inputs['title']);
+        $this->assertEquals($response->getContent(), $project->path());
+
+        $this->assertCount(0, $project->tasks);
+
+        //tasks with bodys
+        $inputs['tasks'] = [['body' => '123'],['body' => '456']];
+
+        $response = $this->post(route('project.store', $inputs))->assertStatus(200);
+
+        $project = Project::all()->last();
+
+        $this->assertEquals($response->getContent(), $project->path());
+
+        $this->assertCount(2, $project->tasks);
     }
 
     public function testUserCanSeeTheirProjects()

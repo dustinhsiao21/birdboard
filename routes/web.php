@@ -14,13 +14,12 @@
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'ProjectController@index')->name('index');
     Route::get('projects', 'ProjectController@index')->name('project.index');
-    Route::get('projects/create', 'ProjectController@create')->name('project.create');
+    Route::post('projects', 'ProjectController@store')->name('project.store');
     Route::get('projects/{project}', 'ProjectController@show')->name('project.show');
     Route::get('projects/{project}/edit', 'ProjectController@edit')->name('project.edit');
     Route::post('projects/{project}/update', 'ProjectController@update')->name('project.update');
     Route::post('projects/{project}/delete', 'ProjectController@delete')->name('project.delete');
     Route::post('projects/{project}/invitations', 'ProjectController@invite')->name('project.invite');
-    Route::post('projects', 'ProjectController@store')->name('project.store');
 
     Route::post('projects/{project}/task', 'TaskController@create')->name('project.task.create');
     Route::post('projects/{project}/task/{task}', 'TaskController@update')->name('project.task.update');

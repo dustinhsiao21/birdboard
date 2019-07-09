@@ -48,9 +48,19 @@ class ProjectController extends Controller
 
     public function store(StoreRequest $request)
     {
-        $project = $this->projects->create($request->onlyRules() + ['user_id' => auth()->user()->id]);
+        $inputs = $request->onlyRules();
+        $tasks = array_pull($inputs, 'tasks');
+        $tasks = array_filter($tasks, function($task){
+            return !is_null($task['body']);
+        });
 
-        return redirect($project->path());
+        $project = $this->projects->create($inputs + ['user_id' => auth()->user()->id]);
+
+        if( $tasks ){
+            $project->tasks()->createMany($tasks);
+        }
+
+        return $project->path();
     }
 
     public function update(Project $project, UpdateRequest $request)

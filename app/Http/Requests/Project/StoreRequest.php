@@ -11,6 +11,7 @@ class StoreRequest extends Request
         return [
             'title' => 'required|string',
             'description' => 'required|string',
+            'tasks' => 'array',
         ];
     }
 }
