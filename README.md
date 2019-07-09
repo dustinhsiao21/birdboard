@@ -11,13 +11,15 @@ this is for laravel demo
 composer install
 php artisan key:generate
 php artisan migrate
+npm install
+npm run dev
 ```
 
 And You Can Enjoy the Demo!
 
-### Usage
+### Feature
 
-1. You could create a project.
-2. You can create a task for a project.
-3. You can invite people to the project who is created in this application.
-4. You can update the project's informations.
+1. You could create a project with tasks.
+2. You could create a task for a project.
+3. You could update the project's informations.
+4. If you're the project's owner, you could delete the project and invite others user in this application.
