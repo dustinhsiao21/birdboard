@@ -10,9 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', 'ProjectController@index')->name('index');
     Route::get('projects', 'ProjectController@index')->name('project.index');
     Route::post('projects', 'ProjectController@store')->name('project.store');
     Route::get('projects/{project}', 'ProjectController@show')->name('project.show');
@@ -26,5 +26,3 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

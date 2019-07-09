@@ -1,23 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="d-flex flex-column justify-content-center align-items-center" style="height:80vh">
+    <h1 class="text-primary" style="font-size:84px;">BirdBoard</h1>
+    <a href="https://github.com/dustinhsiao21/birdboard" class="text-uppercase">Watch Source Code Here</a>
+    @auth
+        <a href="{{ route('project.index') }}" class="btn btn-secondary mt-4">Go to My Projects</a>
+    @endAuth
 </div>
 @endsection
