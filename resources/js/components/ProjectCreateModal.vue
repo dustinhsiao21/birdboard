@@ -6,13 +6,13 @@
                 <div class="mr-n4">
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="form.title"/>
-                        <small class="text-danger" v-if="errors.title" v-text="errors.title[0]"></small>
+                        <input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="form.title" :class="form.errors.title ? 'is-invalid': ''"/>
+                        <small class="text-danger" v-if="form.errors.title" v-text="form.errors.title[0]"></small>
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea name="description" id="description" class="form-control" placeholder="Description" rows="7" v-model="form.description"/>
-                        <small class="text-danger" v-if="errors.description" v-text="errors.description[0]"></small>
+                        <textarea name="description" id="description" class="form-control" placeholder="Description" rows="7" v-model="form.description" :class="form.errors.description ? 'is-invalid': ''"/>
+                        <small class="text-danger" v-if="form.errors.description" v-text="form.errors.description[0]"></small>
                     </div>
                 </div>
                 <div class="ml-n4">
@@ -21,7 +21,7 @@
                         <input type="text" name="task" id="task" class="form-control mb-2" placeholder="Task 1" v-for="(task, index) in form.tasks" :key="index" v-model="task.body"/>
                     </div>
                     <div>
-                        <button type="button" class="btn btn-outline-dark" @click="add()">add Some Tasks</button>
+                        <button type="button" class="btn btn-outline-dark" @click="add()">add New Tasks</button>
                     </div>
                 </div>
             </div>
@@ -34,17 +34,17 @@
 </template>
 
 <script>
+import BirdboardForm from './BirdboardForm';
     export default {
         data() {
             return {
-                form: {
+                form: new BirdboardForm({
                     title: '',
                     description: '',
                     tasks: [
                         { body : '' },
                     ]
-                },
-                errors: {}
+                }),
             };
         },
         methods: {
@@ -52,12 +52,9 @@
                 this.form.tasks.push({body:''});
             },
             submit() {
-                axios.post('/projects', this.form)
+                this.form.submit('/projects')
                     .then(response => {
                         location = response.data;
-                    })
-                    .catch(errors => {
-                        this.errors = errors.response.data.errors;
                     });
             }
         }

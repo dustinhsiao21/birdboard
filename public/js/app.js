@@ -1838,6 +1838,7 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _BirdboardForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BirdboardForm */ "./resources/js/components/BirdboardForm.js");
 //
 //
 //
@@ -1873,17 +1874,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      form: {
+      form: new _BirdboardForm__WEBPACK_IMPORTED_MODULE_0__["default"]({
         title: '',
         description: '',
         tasks: [{
           body: ''
         }]
-      },
-      errors: {}
+      })
     };
   },
   methods: {
@@ -1893,12 +1894,8 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     submit: function submit() {
-      var _this = this;
-
-      axios.post('/projects', this.form).then(function (response) {
+      this.form.submit('/projects').then(function (response) {
         location = response.data;
-      })["catch"](function (errors) {
-        _this.errors = errors.response.data.errors;
       });
     }
   }
@@ -20191,6 +20188,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
+                    class: _vm.form.errors.title ? "is-invalid" : "",
                     attrs: {
                       type: "text",
                       name: "title",
@@ -20208,10 +20206,12 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _vm.errors.title
+                  _vm.form.errors.title
                     ? _c("small", {
                         staticClass: "text-danger",
-                        domProps: { textContent: _vm._s(_vm.errors.title[0]) }
+                        domProps: {
+                          textContent: _vm._s(_vm.form.errors.title[0])
+                        }
                       })
                     : _vm._e()
                 ]),
@@ -20231,6 +20231,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
+                    class: _vm.form.errors.description ? "is-invalid" : "",
                     attrs: {
                       name: "description",
                       id: "description",
@@ -20248,11 +20249,11 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _vm.errors.description
+                  _vm.form.errors.description
                     ? _c("small", {
                         staticClass: "text-danger",
                         domProps: {
-                          textContent: _vm._s(_vm.errors.description[0])
+                          textContent: _vm._s(_vm.form.errors.description[0])
                         }
                       })
                     : _vm._e()
@@ -20311,7 +20312,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("add Some Tasks")]
+                    [_vm._v("add New Tasks")]
                   )
                 ])
               ])
@@ -32597,6 +32598,77 @@ if (token) {
 } else {
   console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
+
+/***/ }),
+
+/***/ "./resources/js/components/BirdboardForm.js":
+/*!**************************************************!*\
+  !*** ./resources/js/components/BirdboardForm.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var BirdboardForm =
+/*#__PURE__*/
+function () {
+  function BirdboardForm(data) {
+    _classCallCheck(this, BirdboardForm);
+
+    this.originalData = JSON.parse(JSON.stringify(data)); //deep copy
+
+    Object.assign(this, data);
+    this.errors = {};
+    this.submitted = false;
+  }
+
+  _createClass(BirdboardForm, [{
+    key: "data",
+    value: function data() {
+      var _this = this;
+
+      return Object.keys(this.originalData).reduce(function (data, attribute) {
+        data[attribute] = _this[attribute];
+        return data;
+      }, {});
+    }
+  }, {
+    key: "submit",
+    value: function submit(endpoint) {
+      return axios.post(endpoint, this.data())["catch"](this.onFail.bind(this)).then(this.onSuccess.bind(this));
+    }
+  }, {
+    key: "onFail",
+    value: function onFail(error) {
+      this.errors = error.response.data.errors;
+      this.submitted = false;
+      throw error;
+    }
+  }, {
+    key: "onSuccess",
+    value: function onSuccess(response) {
+      this.submitted = true;
+      this.errors = {};
+      return response;
+    }
+  }, {
+    key: "reset",
+    value: function reset() {
+      Object.assign(this, this.originalData);
+    }
+  }]);
+
+  return BirdboardForm;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (BirdboardForm);
 
 /***/ }),
 
