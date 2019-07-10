@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Gate;
 
 class DeleteRequest extends Request
 {
+    /**
+     * authorize
+     *
+     * @return boolean
+     */
     public function authorize()
     {
         return Gate::allows('delete', $this->route('project'));

@@ -12,11 +12,23 @@ class TaskController extends Controller
 {
     private $tasks;
 
+    /**
+     * construct
+     *
+     * @param TaskRepository $tasks
+     */
     public function __construct(TaskRepository $tasks)
     {
         $this->tasks = $tasks;
     }
 
+    /**
+     * create new task
+     *
+     * @param Project $project
+     * @param CreateRequest $request
+     * @return void
+     */
     public function create(Project $project, CreateRequest $request)
     {
         $this->tasks->create(['project_id' => $project->id] + $request->onlyRules());

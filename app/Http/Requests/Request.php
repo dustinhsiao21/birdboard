@@ -6,11 +6,21 @@ use Illuminate\Foundation\Http\FormRequest;
 
 abstract class Request extends FormRequest
 {
+    /**
+     * authorize
+     *
+     * @return boolean
+     */
     public function authorize()
     {
         return true;
     }
 
+    /**
+     * take the values only when the keys in rules()
+     *
+     * @return array
+     */
     public function onlyRules()
     {
         $fields = array_keys($this->rules());
@@ -21,11 +31,21 @@ abstract class Request extends FormRequest
         return $this->only($fields);
     }
 
+    /**
+     * the rules of each request
+     *
+     * @return array
+     */
     public function rules()
     {
         return [];
     }
 
+    /**
+     * if the authorize() is failure, will abort to 403
+     *
+     * @return view
+     */
     public function forbiddenResponse()
     {
         abort(403);

@@ -7,11 +7,21 @@ use Illuminate\Support\Facades\Gate;
 
 class InviteRequest extends Request
 {
+    /**
+     * authorize
+     *
+     * @return boolean
+     */
     public function authorize()
     {
         return Gate::allows('invite', $this->route('project'));
     }
 
+    /**
+     * rules
+     *
+     * @return array
+     */
     public function rules()
     {
         return [

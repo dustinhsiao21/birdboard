@@ -6,6 +6,11 @@ use App\Http\Requests\Request;
 
 class StoreRequest extends Request
 {
+    /**
+     * rules
+     *
+     * @return array
+     */
     public function rules()
     {
         return [
