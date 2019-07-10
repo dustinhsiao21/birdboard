@@ -1,6 +1,6 @@
 <div class="card mt-3">
     <div class="card-header">
-        Member
+        Members
     </div>
     <div class="card-body">
         <p> Owner: {{ $project->user->name }}</p>

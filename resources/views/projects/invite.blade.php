@@ -4,7 +4,7 @@
         Invite
     </div>
     <div class="card-body">
-        <div class="form-group mt-4">
+        <div class="form-group">
             <form action="{{ route('project.invite', ['project' => $project->id])}}" method="POST">
             @csrf
             <select class="form-control" id="id" name="id">
