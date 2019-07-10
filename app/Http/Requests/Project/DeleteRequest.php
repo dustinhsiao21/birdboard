@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Gate;
 class DeleteRequest extends Request
 {
     /**
-     * authorize
+     * authorize.
      *
-     * @return boolean
+     * @return bool
      */
     public function authorize()
     {

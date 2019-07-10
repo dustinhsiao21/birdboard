@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Gate;
 class UpdateRequest extends Request
 {
     /**
-     * authorize
+     * authorize.
      *
-     * @return boolean
+     * @return bool
      */
     public function authorize()
     {
@@ -18,7 +18,7 @@ class UpdateRequest extends Request
     }
 
     /**
-     * rules
+     * rules.
      *
      * @return array
      */

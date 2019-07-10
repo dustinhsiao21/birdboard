@@ -16,7 +16,7 @@ class ProjectController extends Controller
     private $projects;
 
     /**
-     * construct
+     * construct.
      *
      * @param ProjectRepository $projects
      */
@@ -26,7 +26,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * get all projects
+     * get all projects.
      *
      * @return void
      */
@@ -39,7 +39,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * edit project
+     * edit project.
      *
      * @param Project $project
      * @return view
@@ -50,9 +50,9 @@ class ProjectController extends Controller
     }
 
     /**
-     * show the selected project
+     * show the selected project.
      *
-     * @param Project $project 
+     * @param Project $project
      * @param ShowRequest $request
      * @param UserRepository $users
      * @return view
@@ -66,7 +66,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * store new project
+     * store new project.
      *
      * @param StoreRequest $request
      * @return string return project path
@@ -90,7 +90,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * update the project informations
+     * update the project informations.
      *
      * @param Project $project
      * @param UpdateRequest $request
@@ -104,7 +104,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * Invite user to the project
+     * Invite user to the project.
      *
      * @param Project $project
      * @param InviteRequest $request
@@ -121,7 +121,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * delete the project
+     * delete the project.
      *
      * @param Project $project
      * @param DeleteRequest $request

@@ -7,9 +7,9 @@ use Illuminate\Foundation\Http\FormRequest;
 abstract class Request extends FormRequest
 {
     /**
-     * authorize
+     * authorize.
      *
-     * @return boolean
+     * @return bool
      */
     public function authorize()
     {
@@ -17,7 +17,7 @@ abstract class Request extends FormRequest
     }
 
     /**
-     * take the values only when the keys in rules()
+     * take the values only when the keys in rules().
      *
      * @return array
      */
@@ -32,7 +32,7 @@ abstract class Request extends FormRequest
     }
 
     /**
-     * the rules of each request
+     * the rules of each request.
      *
      * @return array
      */
@@ -42,7 +42,7 @@ abstract class Request extends FormRequest
     }
 
     /**
-     * if the authorize() is failure, will abort to 403
+     * if the authorize() is failure, will abort to 403.
      *
      * @return view
      */
