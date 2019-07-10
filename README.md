@@ -3,6 +3,8 @@
 
 this is for laravel demo
 
+![demo](./public/images/demo.png)
+
 ## Install
 
 1. You could download this repo.
