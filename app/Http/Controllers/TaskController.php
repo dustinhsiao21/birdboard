@@ -13,7 +13,7 @@ class TaskController extends Controller
     private $tasks;
 
     /**
-     * construct
+     * construct.
      *
      * @param TaskRepository $tasks
      */
@@ -23,7 +23,7 @@ class TaskController extends Controller
     }
 
     /**
-     * create new task
+     * create new task.
      *
      * @param Project $project
      * @param CreateRequest $request

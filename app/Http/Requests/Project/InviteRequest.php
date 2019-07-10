@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Gate;
 class InviteRequest extends Request
 {
     /**
-     * authorize
+     * authorize.
      *
-     * @return boolean
+     * @return bool
      */
     public function authorize()
     {
@@ -18,7 +18,7 @@ class InviteRequest extends Request
     }
 
     /**
-     * rules
+     * rules.
      *
      * @return array
      */

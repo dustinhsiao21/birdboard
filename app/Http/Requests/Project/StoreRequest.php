@@ -7,7 +7,7 @@ use App\Http\Requests\Request;
 class StoreRequest extends Request
 {
     /**
-     * rules
+     * rules.
      *
      * @return array
      */

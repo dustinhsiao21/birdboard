@@ -21,11 +21,11 @@ class ProjectPolicy
     }
 
     /**
-     * could show
+     * could show.
      *
      * @param User $user
      * @param Project $project
-     * @return boolean
+     * @return bool
      */
     public function show(User $user, Project $project)
     {
@@ -33,11 +33,11 @@ class ProjectPolicy
     }
 
     /**
-     * could update
+     * could update.
      *
      * @param User $user
      * @param Project $project
-     * @return boolean
+     * @return bool
      */
     public function update(User $user, Project $project)
     {
@@ -45,11 +45,11 @@ class ProjectPolicy
     }
 
     /**
-     * could invite
+     * could invite.
      *
      * @param User $user
      * @param Project $project
-     * @return boolean
+     * @return bool
      */
     public function invite(User $user, Project $project)
     {
@@ -57,11 +57,11 @@ class ProjectPolicy
     }
 
     /**
-     * could delete
+     * could delete.
      *
      * @param User $user
      * @param Project $project
-     * @return boolean
+     * @return bool
      */
     public function delete(User $user, Project $project)
     {
@@ -69,11 +69,11 @@ class ProjectPolicy
     }
 
     /**
-     * could create task
+     * could create task.
      *
      * @param User $user
      * @param Project $project
-     * @return boolean
+     * @return bool
      */
     public function createTask(User $user, Project $project)
     {
@@ -81,11 +81,11 @@ class ProjectPolicy
     }
 
     /**
-     * could update Task
+     * could update Task.
      *
      * @param User $user
      * @param Project $project
-     * @return boolean
+     * @return bool
      */
     public function updateTask(User $user, Project $project)
     {
@@ -93,11 +93,11 @@ class ProjectPolicy
     }
 
     /**
-     * basic policy
+     * basic policy.
      *
      * @param User $user
      * @param Project $project
-     * @return boolean
+     * @return bool
      */
     protected function basic(User $user, Project $project)
     {
@@ -105,11 +105,11 @@ class ProjectPolicy
     }
 
     /**
-     * if the login user is the project's owner
+     * if the login user is the project's owner.
      *
      * @param User $user
      * @param Project $project
-     * @return boolean
+     * @return bool
      */
     protected function isOwner(User $user, Project $project)
     {
