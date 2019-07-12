@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ProjectControllerTest extends TestCase
+class UserControllerTest extends TestCase
 {
     use WithFaker, RefreshDatabase;
 
