@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
+use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
 class ProjectControllerTest extends TestCase
 {
@@ -24,7 +24,7 @@ class ProjectControllerTest extends TestCase
         $data = [
             'name' =>  $name = $this->faker->name,
         ];
-        
+
         $this->post(route('user.setting.update', $data))->assertRedirect(route('project.index'));
 
         $this->assertDatabaseHas('users', $data);
