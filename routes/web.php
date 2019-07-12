@@ -23,6 +23,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('projects/{project}/task', 'TaskController@create')->name('project.task.create');
     Route::post('projects/{project}/task/{task}', 'TaskController@update')->name('project.task.update');
+
+    Route::get('user/setting', 'UserController@index')->name('user.setting');
+    Route::post('user/setting', 'UserController@update')->name('user.setting.update');
 });
 
 Auth::routes();
