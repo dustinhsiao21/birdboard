@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\User\UpdateRequest;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\User\UpdateRequest;
 
 class UserController extends Controller
 {
@@ -35,7 +35,7 @@ class UserController extends Controller
         if ($password = $request->password) {
             $user->password = Hash::make($password);
         }
-        
+
         $user->save();
 
         return redirect(route('project.index'));
