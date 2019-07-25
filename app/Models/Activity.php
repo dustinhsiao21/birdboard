@@ -16,7 +16,7 @@ class Activity extends Model
     protected $guarded = [];
 
     /**
-     * return relationship
+     * return relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
@@ -26,7 +26,7 @@ class Activity extends Model
     }
 
     /**
-     * return relationship
+     * return relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Collection;
 abstract class BaseRepository
 {
     /**
-     * model name
+     * model name.
      *
      * @var Model
      */
     private $model;
 
     /**
-     * construct
+     * construct.
      *
      * @param Model $model
      * @return void
@@ -26,7 +26,7 @@ abstract class BaseRepository
     }
 
     /**
-     * find model
+     * find model.
      *
      * @param ineteger $id
      * @return Model
@@ -37,7 +37,7 @@ abstract class BaseRepository
     }
 
     /**
-     * find model of fail
+     * find model of fail.
      *
      * @param ineteger $id
      * @return Model
@@ -48,7 +48,7 @@ abstract class BaseRepository
     }
 
     /**
-     * find all models
+     * find all models.
      *
      * @return Collection
      */
@@ -58,7 +58,7 @@ abstract class BaseRepository
     }
 
     /**
-     * Undocumented function
+     * Undocumented function.
      *
      * @param array $array
      * @return Model
@@ -69,13 +69,13 @@ abstract class BaseRepository
     }
 
     /**
-     * find model and update
+     * find model and update.
      *
-     * @param integer $id model_id
+     * @param int $id model_id
      * @param array $array updated date
      * @return bool
      */
-    public function update(int $id, array $array) : bool 
+    public function update(int $id, array $array) : bool
     {
         return $this->find($id)->update($array);
     }

@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use App\Models\Project;
 use App\Repositories\TaskRepository;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Task\CreateRequest;
 use App\Http\Requests\Task\UpdateRequest;
-use Illuminate\Http\RedirectResponse;
 
 class TaskController extends Controller
 {
@@ -38,7 +38,7 @@ class TaskController extends Controller
     }
 
     /**
-     * update Task
+     * update Task.
      *
      * @param Project $project
      * @param Task $task

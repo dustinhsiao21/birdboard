@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\User\UpdateRequest;
 use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\User\UpdateRequest;
 
 class UserController extends Controller
 {

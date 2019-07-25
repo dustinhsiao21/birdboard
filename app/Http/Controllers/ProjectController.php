@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use Illuminate\View\View;
 use App\Repositories\UserRepository;
+use Illuminate\Http\RedirectResponse;
 use App\Repositories\ProjectRepository;
 use App\Http\Requests\Project\ShowRequest;
 use App\Http\Requests\Project\StoreRequest;
 use App\Http\Requests\Project\DeleteRequest;
 use App\Http\Requests\Project\InviteRequest;
 use App\Http\Requests\Project\UpdateRequest;
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
 
 class ProjectController extends Controller
 {
