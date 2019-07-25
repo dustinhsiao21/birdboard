@@ -12,6 +12,11 @@ class Project extends Model
 {
     use SoftDeletes;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'user_id',
         'title',
@@ -19,31 +24,61 @@ class Project extends Model
         'notes',
     ];
 
-    public function path()
-    {
-        return route('project.show', ['id' => $this->id]);
-    }
-
+    /**
+     * return relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-
+    /**
+     * return relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
     public function members()
     {
         return $this->belongsToMany(User::class);
     }
 
+    /**
+     * return relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
     public function tasks()
     {
         return $this->hasMany(Task::class);
     }
 
+    /**
+     * return relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
     public function activities()
     {
         return $this->hasMany(Activity::class)->latest();
     }
 
+    /**
+     * get project path
+     *
+     * @return string
+     */
+    public function path() : string
+    {
+        return route('project.show', ['id' => $this->id]);
+    }
+
+    /**
+     * project could invite momber
+     *
+     * @param User $user
+     * @return void
+     */
     public function invite(User $user)
     {
         $this->members()->attach($user);

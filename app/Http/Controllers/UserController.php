@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\User\UpdateRequest;
+use Illuminate\Http\RedirectResponse;
 
 class UserController extends Controller
 {
@@ -25,7 +26,7 @@ class UserController extends Controller
      * @param UpdateRequest $request
      * @return view
      */
-    public function update(UpdateRequest $request)
+    public function update(UpdateRequest $request) : RedirectResponse
     {
         $user = auth()->user();
         if ($name = $request->name) {

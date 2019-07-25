@@ -236,11 +236,11 @@ class ProjectControllerTest extends TestCase
             ->assertStatus(403);
     }
 
-    public function testProjectMemberCannotSeeTheInvitation()
+    public function testProjectMemberCannotSeeInvitation()
     {
         // Bob is a member, so he could not see the others name for invitation
         $Bob = $this->signIn();
-        $John = factory(User::class)->create();
+        $John = factory(User::class)->create(['name' => 'MY_NAME_IS_JOHN']);
         $project = factory(Project::class)->create();
         $project->invite($Bob);
 
