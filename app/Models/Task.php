@@ -27,7 +27,7 @@ class Task extends Model
     protected $touches = ['project'];
 
     /**
-     * return relationship
+     * return relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsTo
      */
@@ -37,7 +37,7 @@ class Task extends Model
     }
 
     /**
-     * return relationship
+     * return relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
