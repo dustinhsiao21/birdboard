@@ -25,7 +25,7 @@ class Project extends Model
     ];
 
     /**
-     * return relationship
+     * return relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsTo
      */
@@ -33,8 +33,9 @@ class Project extends Model
     {
         return $this->belongsTo(User::class);
     }
+
     /**
-     * return relationship
+     * return relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
@@ -44,7 +45,7 @@ class Project extends Model
     }
 
     /**
-     * return relationship
+     * return relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
@@ -54,7 +55,7 @@ class Project extends Model
     }
 
     /**
-     * return relationship
+     * return relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
@@ -64,7 +65,7 @@ class Project extends Model
     }
 
     /**
-     * get project path
+     * get project path.
      *
      * @return string
      */
@@ -74,7 +75,7 @@ class Project extends Model
     }
 
     /**
-     * project could invite momber
+     * project could invite momber.
      *
      * @param User $user
      * @return void
