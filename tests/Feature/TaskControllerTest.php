@@ -2,12 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\User;
-use Tests\TestCase;
-use App\Models\Task;
 use App\Models\Project;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Models\Task;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
 
 class TaskControllerTest extends TestCase
 {
