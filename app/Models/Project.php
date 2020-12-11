@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\User;
-use App\Models\Task;
 use App\Models\Activity;
+use App\Models\Task;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -69,7 +69,7 @@ class Project extends Model
      *
      * @return string
      */
-    public function path() : string
+    public function path(): string
     {
         return route('project.show', ['id' => $this->id]);
     }
