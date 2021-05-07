@@ -2,8 +2,8 @@
 
 namespace App\Repositories;
 
-use App\User;
 use App\Repositories\BaseRepository;
+use App\User;
 use Illuminate\Database\Eloquent\Collection;
 
 class UserRepository extends BaseRepository
@@ -19,7 +19,7 @@ class UserRepository extends BaseRepository
      * @param array $ids
      * @return collection
      */
-    public function findAllExcept(array $ids) : Collection
+    public function findAllExcept(array $ids): Collection
     {
         return $this->all()->whereNotIn('id', $ids);
     }
