@@ -2,8 +2,8 @@
 
 namespace App\Repositories;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 abstract class BaseRepository
 {
@@ -31,7 +31,7 @@ abstract class BaseRepository
      * @param ineteger $id
      * @return Model
      */
-    public function find($id) : Model
+    public function find($id): Model
     {
         return $this->model->find($id);
     }
@@ -42,7 +42,7 @@ abstract class BaseRepository
      * @param ineteger $id
      * @return Model
      */
-    public function findOrFail($id) : Model
+    public function findOrFail($id): Model
     {
         return $this->model->findOrFail($id);
     }
@@ -52,7 +52,7 @@ abstract class BaseRepository
      *
      * @return Collection
      */
-    public function all() : Collection
+    public function all(): Collection
     {
         return $this->model->all();
     }
@@ -63,7 +63,7 @@ abstract class BaseRepository
      * @param array $array
      * @return Model
      */
-    public function create(array $array) : Model
+    public function create(array $array): Model
     {
         return $this->model->create($array);
     }
@@ -75,7 +75,7 @@ abstract class BaseRepository
      * @param array $array updated date
      * @return bool
      */
-    public function update(int $id, array $array) : bool
+    public function update(int $id, array $array): bool
     {
         return $this->find($id)->update($array);
     }
