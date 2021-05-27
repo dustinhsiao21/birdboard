@@ -2,10 +2,10 @@
 
 namespace Tests\Unit\Repositories;
 
-use App\User;
-use Tests\TestCase;
 use App\Repositories\UserRepository;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class UserRepositoryTest extends TestCase
 {
@@ -13,7 +13,7 @@ class UserRepositoryTest extends TestCase
 
     private $repo;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         $this->repo = app(UserRepository::class);
