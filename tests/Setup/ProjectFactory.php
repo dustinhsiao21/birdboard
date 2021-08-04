@@ -2,9 +2,9 @@
 
 namespace Tests\Setup;
 
-use App\User;
-use App\Models\Task;
 use App\Models\Project;
+use App\Models\Task;
+use App\User;
 
 class ProjectFactory
 {
