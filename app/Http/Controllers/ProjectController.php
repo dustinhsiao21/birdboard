@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
-use Illuminate\View\View;
-use App\Repositories\UserRepository;
-use Illuminate\Http\RedirectResponse;
-use App\Repositories\ProjectRepository;
-use App\Http\Requests\Project\ShowRequest;
-use App\Http\Requests\Project\StoreRequest;
 use App\Http\Requests\Project\DeleteRequest;
 use App\Http\Requests\Project\InviteRequest;
+use App\Http\Requests\Project\ShowRequest;
+use App\Http\Requests\Project\StoreRequest;
 use App\Http\Requests\Project\UpdateRequest;
+use App\Models\Project;
+use App\Repositories\ProjectRepository;
+use App\Repositories\UserRepository;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class ProjectController extends Controller
 {
@@ -20,7 +20,7 @@ class ProjectController extends Controller
     /**
      * construct.
      *
-     * @param ProjectRepository $projects
+     * @param  ProjectRepository  $projects
      */
     public function __construct(ProjectRepository $projects)
     {
@@ -32,7 +32,7 @@ class ProjectController extends Controller
      *
      * @return void
      */
-    public function index() : View
+    public function index(): View
     {
         $user = auth()->user();
         $projects = $user->projects->merge($user->relatedProjects)->sortBy('updated_at');
@@ -43,10 +43,10 @@ class ProjectController extends Controller
     /**
      * edit project.
      *
-     * @param Project $project
+     * @param  Project  $project
      * @return view
      */
-    public function edit(Project $project) : View
+    public function edit(Project $project): View
     {
         return view('projects.edit', compact('project'));
     }
@@ -54,12 +54,12 @@ class ProjectController extends Controller
     /**
      * show the selected project.
      *
-     * @param Project $project
-     * @param ShowRequest $request
-     * @param UserRepository $users
+     * @param  Project  $project
+     * @param  ShowRequest  $request
+     * @param  UserRepository  $users
      * @return view
      */
-    public function show(Project $project, ShowRequest $request, UserRepository $users) : View
+    public function show(Project $project, ShowRequest $request, UserRepository $users): View
     {
         $except = array_merge($project->members->pluck('id')->toArray(), [$project->user_id]);
         $users = $users->findAllExcept($except);
@@ -70,10 +70,10 @@ class ProjectController extends Controller
     /**
      * store new project.
      *
-     * @param StoreRequest $request
+     * @param  StoreRequest  $request
      * @return string return project path
      */
-    public function store(StoreRequest $request) : string
+    public function store(StoreRequest $request): string
     {
         $inputs = $request->onlyRules();
         $tasks = array_pull($inputs, 'tasks');
@@ -94,11 +94,11 @@ class ProjectController extends Controller
     /**
      * update the project informations.
      *
-     * @param Project $project
-     * @param UpdateRequest $request
+     * @param  Project  $project
+     * @param  UpdateRequest  $request
      * @return view redirect to the project view
      */
-    public function update(Project $project, UpdateRequest $request) : RedirectResponse
+    public function update(Project $project, UpdateRequest $request): RedirectResponse
     {
         $project->update($request->onlyRules());
 
@@ -108,12 +108,12 @@ class ProjectController extends Controller
     /**
      * Invite user to the project.
      *
-     * @param Project $project
-     * @param InviteRequest $request
-     * @param UserRepository $users
+     * @param  Project  $project
+     * @param  InviteRequest  $request
+     * @param  UserRepository  $users
      * @return view redirect to the project view
      */
-    public function invite(Project $project, InviteRequest $request, UserRepository $users) : RedirectResponse
+    public function invite(Project $project, InviteRequest $request, UserRepository $users): RedirectResponse
     {
         $user = $users->findOrFail($request->id);
 
@@ -125,11 +125,11 @@ class ProjectController extends Controller
     /**
      * delete the project.
      *
-     * @param Project $project
-     * @param DeleteRequest $request
+     * @param  Project  $project
+     * @param  DeleteRequest  $request
      * @return string return the projects page
      */
-    public function delete(Project $project, DeleteRequest $request) : string
+    public function delete(Project $project, DeleteRequest $request): string
     {
         $project->delete();
 
