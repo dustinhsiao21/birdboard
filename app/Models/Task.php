@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Project;
 use App\Models\Activity;
+use App\Models\Project;
 use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
