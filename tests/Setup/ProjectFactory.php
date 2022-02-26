@@ -2,9 +2,9 @@
 
 namespace Tests\Setup;
 
-use App\User;
-use App\Models\Task;
 use App\Models\Project;
+use App\Models\Task;
+use App\User;
 
 class ProjectFactory
 {
@@ -25,7 +25,7 @@ class ProjectFactory
     /**
      * set Count.
      *
-     * @param int $count
+     * @param  int  $count
      * @return $this
      */
     public function withTask(int $count)
@@ -38,7 +38,7 @@ class ProjectFactory
     /**
      * set user.
      *
-     * @param User $user
+     * @param  User  $user
      * @return $this
      */
     public function userBy(User $user)
