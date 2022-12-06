@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Task;
-use App\Models\Project;
-use App\Repositories\TaskRepository;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Task\CreateRequest;
 use App\Http\Requests\Task\UpdateRequest;
+use App\Models\Project;
+use App\Models\Task;
+use App\Repositories\TaskRepository;
+use Illuminate\Http\RedirectResponse;
 
 class TaskController extends Controller
 {
@@ -16,7 +16,7 @@ class TaskController extends Controller
     /**
      * construct.
      *
-     * @param TaskRepository $tasks
+     * @param  TaskRepository  $tasks
      */
     public function __construct(TaskRepository $tasks)
     {
@@ -26,11 +26,11 @@ class TaskController extends Controller
     /**
      * create new task.
      *
-     * @param Project $project
-     * @param CreateRequest $request
+     * @param  Project  $project
+     * @param  CreateRequest  $request
      * @return void
      */
-    public function create(Project $project, CreateRequest $request) : RedirectResponse
+    public function create(Project $project, CreateRequest $request): RedirectResponse
     {
         $this->tasks->create(['project_id' => $project->id] + $request->onlyRules());
 
@@ -40,12 +40,12 @@ class TaskController extends Controller
     /**
      * update Task.
      *
-     * @param Project $project
-     * @param Task $task
-     * @param UpdateRequest $request
+     * @param  Project  $project
+     * @param  Task  $task
+     * @param  UpdateRequest  $request
      * @return RedirectResponse To project path
      */
-    public function update(Project $project, Task $task, UpdateRequest $request) : RedirectResponse
+    public function update(Project $project, Task $task, UpdateRequest $request): RedirectResponse
     {
         $inputs = $request->onlyRules();
         $inputs['completed'] = array_has($inputs, 'completed') ? true : false;
